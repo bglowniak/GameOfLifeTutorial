@@ -79,6 +79,7 @@ def timeseries(world, num_steps):
 world = init_world(n = 64, cluster_n = 5, clusters = 8)
 series = timeseries(world, 50)
 
+# allows for scrolling through a timeseries using the left and right arrow keys
 def key_event(e):
     global curr_pos
 
