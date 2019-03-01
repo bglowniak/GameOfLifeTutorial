@@ -62,11 +62,11 @@ def timestep(world):
 
     return new_state
 
-#def plot_world(world):
-#    cmap = colors.ListedColormap(['white', 'red'])
-#    plt.pcolor(world, cmap=cmap, edgecolor="black")
-#    plt.axis('square')
-#    #plt.show()
+def plot_world(world):
+    cmap = colors.ListedColormap(['white', 'red'])
+    plt.pcolor(world, cmap=cmap, edgecolor="black")
+    plt.axis('square')
+    plt.show()
 
 def timeseries(world, num_steps):
     simulation_steps = [world]
@@ -76,8 +76,8 @@ def timeseries(world, num_steps):
 
     return simulation_steps
 
-world = init_world(n = 64, cluster_n = 5, clusters = 8)
-series = timeseries(world, 50)
+world = init_world(n = 64, cluster_n = 10, clusters = 20)
+series = timeseries(world, 100)
 
 # allows for scrolling through a timeseries using the left and right arrow keys
 def key_event(e):
