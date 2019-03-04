@@ -45,10 +45,10 @@ def update_cell(world, x, y):
         return ALIVE
 
 def count_alive(world):
-    pass
+    return len(np.where((world == ALIVE).astype(int))[0])
 
 def count_dead(world):
-    pass
+    return len(np.where((world == DEAD).astype(int))[0])
 
 #brute force implementation for now, need to optimize
 def timestep(world):
@@ -75,6 +75,15 @@ def timeseries(world, num_steps):
         simulation_steps.append(world)
 
     return simulation_steps
+
+def plot_density(timeseries):
+    densities = []
+    n = len(timeseries[0])
+    for i in range(0, len(timeseries)):
+        densities.append(count_alive(timeseries[i]) / (n * n))
+
+    plt.plot(densities)
+    plt.show()
 
 world = init_world(n = 64, cluster_n = 10, clusters = 20)
 series = timeseries(world, 100)
