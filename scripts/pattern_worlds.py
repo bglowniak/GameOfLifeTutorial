@@ -1,4 +1,6 @@
 import numpy as np
+ALIVE = 1
+DEAD = 0
 
 def init_fixed_world():
     world = np.zeros((10, 10), dtype=int)
