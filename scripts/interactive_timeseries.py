@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 
 from conway_basic import init_world, timeseries
+from pattern_worlds import init_glider_gun
 
 # mess with parameters here:
 WORLD_SIZE = 64
@@ -12,8 +13,11 @@ CLUSTERS = 20
 TIMESTEPS = 100
 # end parameters
 
-world = init_world(n = WORLD_SIZE, cluster_n = CLUSTER_SIZE, clusters = CLUSTERS)
-series = timeseries(world, TIMESTEPS)
+#world = init_world(n = WORLD_SIZE, cluster_n = CLUSTER_SIZE, clusters = CLUSTERS)
+#series = timeseries(world, TIMESTEPS)
+
+world = init_glider_gun()
+series = timeseries(world, 100)
 
 # allows for scrolling through a timeseries using the left and right arrow keys
 def key_event(e):
