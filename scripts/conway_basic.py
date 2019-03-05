@@ -1,3 +1,6 @@
+''' This file includes a basic implementation of Conway's Game of Life.
+These functions are designed to be imported into other files for boilerplate use '''
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
@@ -45,10 +48,10 @@ def update_cell(world, x, y):
         return ALIVE
 
 def count_alive(world):
-    pass
+    return len(np.where((world == ALIVE).astype(int))[0])
 
 def count_dead(world):
-    pass
+    return len(np.where((world == DEAD).astype(int))[0])
 
 #brute force implementation for now, need to optimize
 def timestep(world):
@@ -70,33 +73,20 @@ def plot_world(world):
 
 def timeseries(world, num_steps):
     simulation_steps = [world]
-    for i in range(0, num_steps):
+    for i in range(0, num_steps - 1):
         world = timestep(world)
         simulation_steps.append(world)
 
     return simulation_steps
 
-world = init_world(n = 64, cluster_n = 10, clusters = 20)
-series = timeseries(world, 100)
+def plot_density(timeseries):
+    densities = []
+    n = len(timeseries[0])
+    for i in range(0, len(timeseries)):
+        densities.append(count_alive(timeseries[i]) / (n * n))
 
-# allows for scrolling through a timeseries using the left and right arrow keys
-def key_event(e):
-    global curr_pos
-
-    if e.key == "right" and curr_pos < len(series) - 1:
-        curr_pos = curr_pos + 1
-    elif e.key == "left" and curr_pos > 0:
-        curr_pos = curr_pos - 1
-    else:
-        return
-
-    ax.cla()
-    ax.pcolor(series[curr_pos], cmap=colors.ListedColormap(['white', 'red']), edgecolor='black')
-    fig.canvas.draw()
-
-curr_pos = 0
-fig = plt.figure()
-fig.canvas.mpl_connect('key_press_event', key_event)
-ax = fig.add_subplot(111)
-ax.pcolor(series[curr_pos], cmap=colors.ListedColormap(['white', 'red']), edgecolor='black')
-plt.show()
+    plt.plot(densities)
+    plt.xlabel("Time")
+    plt.ylabel("Density")
+    plt.suptitle("Density Plot for t = " + str(len(timeseries)) + " steps")
+    plt.show()
