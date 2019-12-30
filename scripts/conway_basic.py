@@ -53,7 +53,7 @@ def count_alive(world):
 def count_dead(world):
     return len(np.where((world == DEAD).astype(int))[0])
 
-#brute force implementation for now, need to optimize
+#brute force implementation, need to optimize
 def timestep(world):
     rows = world.shape[0]
     cols = world.shape[1]
